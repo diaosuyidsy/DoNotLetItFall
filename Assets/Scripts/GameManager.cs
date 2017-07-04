@@ -82,6 +82,11 @@ public class GameManager : MonoBehaviour
 
 	public void RestartGame ()
 	{
+		GameOver ();
+	}
+
+	void restart ()
+	{
 		SceneManager.LoadScene ("Main");
 	}
 
@@ -126,7 +131,7 @@ public class GameManager : MonoBehaviour
 				Debug.Log ("Change Best Score");
 				PlayerPrefs.SetInt ("BestScore", score);
 			}
-			RestartGame ();
+			restart ();
 		}
 
 	}
