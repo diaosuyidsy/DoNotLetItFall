@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 		GameStart = false;
 		LineGenRate = 6f;
 		MovingRate = 2f;
+		Input.multiTouchEnabled = true;
 	}
 
 	public void StartGame ()

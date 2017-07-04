@@ -21,11 +21,11 @@ public class PlayerController : MonoBehaviour
 	void Update ()
 	{
 		if (GameStart) {
-			#if UNITY_EDITOR_OSX
-			if (Input.GetMouseButtonDown (0)) {
-				Detonate (Camera.main.ScreenToWorldPoint (Input.mousePosition), ExplosionRadius, 0f, ExplosionForce);
-			}
-			#endif
+//			#if UNITY_EDITOR_OSX
+//			if (Input.GetMouseButtonDown (0)) {
+//				Detonate (Camera.main.ScreenToWorldPoint (Input.mousePosition), ExplosionRadius, 0f, ExplosionForce);
+//			}
+//			#endif
 
 			#if UNITY_IOS
 			foreach (Touch touch in Input.touches) {

@@ -43,22 +43,21 @@ public class UIRipple : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		#if UNITY_EDITOR_OSX
-		//if the mouse button is down
-		if (Input.GetMouseButtonDown (0)) {
-			//create the Ripple
-			CreateRipple (Camera.main.ScreenToWorldPoint (Input.mousePosition));
-		}
-		#endif
+//		#if UNITY_EDITOR_OSX
+//		//if the mouse button is down
+//		if (Input.GetMouseButtonDown (0)) {
+//			//create the Ripple
+//			CreateRipple (Camera.main.ScreenToWorldPoint (Input.mousePosition));
+//		}
+//		#endif
 
-		#if UNITY_IOS
+		int tapCount = Input.touchCount;
 		foreach (Touch touch in Input.touches) {
 			if (touch.phase == TouchPhase.Began) {
 				//create the Ripple
 				CreateRipple (Camera.main.ScreenToWorldPoint (Input.mousePosition));
 			}
 		}
-		#endif
 	}
 
 	//this will create the Ripple
