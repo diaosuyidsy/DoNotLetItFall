@@ -57,14 +57,28 @@ public class GameManager : MonoBehaviour
 
 	void GenerateNewObstacles ()
 	{
-		int r = Random.Range (1, 3);
-		switch (r) {
-		case 1:
-			StartCoroutine (GenerateNewSpinLine (LineGenRate));
-			break;
-		case 2:
-			StartCoroutine (GenerateNewLine (LineGenRate));
-			break;
+		if (NUM <= 3) {
+			StartCoroutine (GenerateNewLine (LineGenRate, false));
+		} else if (NUM <= 6) {
+			int r = Random.Range (1, 3);
+			switch (r) {
+			case 1:
+				StartCoroutine (GenerateNewSpinLine (LineGenRate, false));
+				break;
+			case 2:
+				StartCoroutine (GenerateNewLine (LineGenRate, false));
+				break;
+			}
+		} else {
+			int r = Random.Range (1, 3);
+			switch (r) {
+			case 1:
+				StartCoroutine (GenerateNewSpinLine (LineGenRate, true));
+				break;
+			case 2:
+				StartCoroutine (GenerateNewLine (LineGenRate, true));
+				break;
+			}
 		}
 
 	}
@@ -82,7 +96,13 @@ public class GameManager : MonoBehaviour
 
 	public void RestartGame ()
 	{
-		GameOver ();
+		int score;
+		int.TryParse (Score.text, out score);
+		if (score > bestscore) {
+			Debug.Log ("Change Best Score");
+			PlayerPrefs.SetInt ("BestScore", score);
+		}
+		restart ();
 	}
 
 	void restart ()
@@ -90,20 +110,22 @@ public class GameManager : MonoBehaviour
 		SceneManager.LoadScene ("Main");
 	}
 
-	IEnumerator GenerateNewSpinLine (float time)
+	IEnumerator GenerateNewSpinLine (float time, bool canSpin)
 	{
 		yield return new WaitForSeconds (time);
 		GameObject Spinline = Instantiate (SpinLinePrefab, new Vector3 (0, Camera.main.orthographicSize), Quaternion.identity, AllGameObjects.transform);
 		Spinline.GetComponent<SpinLineControl> ().Init (NUM);
+		SpinLinePrefab.GetComponent<SpinLineControl> ().CanSpin = canSpin;
 		NUM++;
 		GenerateNewObstacles ();
 	}
 
-	IEnumerator GenerateNewLine (float time)
+	IEnumerator GenerateNewLine (float time, bool canClose)
 	{
 		yield return new WaitForSeconds (time);
 		GameObject Line = Instantiate (LinePrefab, new Vector3 (0, Camera.main.orthographicSize), Quaternion.identity, AllGameObjects.transform);
 		Line.GetComponent<LineControl> ().Init (NUM);
+		Line.GetComponent<LineControl> ().CanClose = canClose;
 		NUM++;
 		GenerateNewObstacles ();
 	}
