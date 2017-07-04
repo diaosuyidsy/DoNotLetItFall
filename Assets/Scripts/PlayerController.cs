@@ -27,13 +27,11 @@ public class PlayerController : MonoBehaviour
 //			}
 //			#endif
 
-			#if UNITY_IOS
 			foreach (Touch touch in Input.touches) {
-				if (touch.phase == TouchPhase.Began) {
-					Detonate (Camera.main.ScreenToWorldPoint (Input.mousePosition), ExplosionRadius, 0f, ExplosionForce);
-				}
+//				if (touch.phase == TouchPhase.Began) {
+				Detonate (Camera.main.ScreenToWorldPoint (touch.position), ExplosionRadius, 0f, ExplosionForce);
+//				}
 			}
-			#endif
 		}
 
 

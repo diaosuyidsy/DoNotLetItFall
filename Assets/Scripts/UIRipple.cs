@@ -53,10 +53,10 @@ public class UIRipple : MonoBehaviour
 
 		int tapCount = Input.touchCount;
 		foreach (Touch touch in Input.touches) {
-			if (touch.phase == TouchPhase.Began) {
-				//create the Ripple
-				CreateRipple (Camera.main.ScreenToWorldPoint (Input.mousePosition));
-			}
+//			if (touch.phase == TouchPhase.Began) {
+			//create the Ripple
+			CreateRipple (Camera.main.ScreenToWorldPoint (touch.position));
+//			}
 		}
 	}
 
