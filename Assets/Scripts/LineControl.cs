@@ -117,8 +117,8 @@ public class LineControl : MonoBehaviour
 				int score;
 				int.TryParse (Score.text, out score);
 				Score.text = (score + 1).ToString ();
-				// Add time
-				GameManager.GM.Tiime += 1f;
+//				// Add time
+//				GameManager.GM.Tiime += 1f;
 				other.gameObject.GetComponent<SquareControl> ().Numbers.Add (NUMb);
 
 				dottedLine.GetComponent<SpriteRenderer> ().color = Color.white;

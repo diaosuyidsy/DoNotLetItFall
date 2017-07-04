@@ -65,7 +65,7 @@ public class SpinLineControl : MonoBehaviour
 				int.TryParse (Score.text, out score);
 				Score.text = (score + 1).ToString ();
 				// Add time
-				GameManager.GM.Tiime += 1f;
+//				GameManager.GM.Tiime += 1f;
 				other.gameObject.GetComponent<SquareControl> ().Numbers.Add (NUMb);
 
 				dottedLine.GetComponent<SpriteRenderer> ().color = Color.white;

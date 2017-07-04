@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 	private float LineGenRate;
 	private float MovingRate;
 	private int NUM;
-	private Text Timer;
+	//	private Text Timer;
 	private Text BestScore;
 	private Text Score;
 	private int MaxSquareNum;
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 	void Start ()
 	{
 		BestScore = GameObject.FindGameObjectWithTag ("BestScore").GetComponent<Text> ();
-		Timer = GameObject.FindGameObjectWithTag ("Time").GetComponent<Text> ();
+//		Timer = GameObject.FindGameObjectWithTag ("Time").GetComponent<Text> ();
 		Score = GameObject.FindGameObjectWithTag ("Score").GetComponent<Text> ();
 
 		bestscore = PlayerPrefs.GetInt ("BestScore", 0);
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 		MaxSquareNum = GameObject.FindGameObjectsWithTag ("Square").Length;
 		SquareNum = MaxSquareNum;
 		Tiime = 10f;
-		Timer.text = Tiime.ToString ("F1");
+//		Timer.text = Tiime.ToString ("F1");
 		NUM = 1;
 		GameStart = false;
 		LineGenRate = 6f;
@@ -133,11 +133,11 @@ public class GameManager : MonoBehaviour
 	void Update ()
 	{
 		if (GameStart) {
-			Tiime -= Time.deltaTime;
-			Timer.text = Tiime.ToString ("F1");
-			if (Tiime <= 0f) {
-				GameOver ();
-			}
+//			Tiime -= Time.deltaTime;
+//			Timer.text = Tiime.ToString ("F1");
+//			if (Tiime <= 0f) {
+//				GameOver ();
+//			}
 			foreach (Transform child in AllGameObjects.transform) {
 				child.Translate (Vector3.down * Time.deltaTime * MovingRate);
 			}
@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
 
 	public void GameOver ()
 	{
-		if (SquareNum <= 0 || Tiime <= 0f) {
+		if (SquareNum <= 0) {
 			int score;
 			int.TryParse (Score.text, out score);
 			if (score > bestscore) {
