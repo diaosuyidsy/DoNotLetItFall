@@ -25,8 +25,8 @@ public class Ripple : MonoBehaviour
 	void Update ()
 	{
 		//lerp the scale and the color
-		transform.localScale = Vector3.Lerp (transform.localScale, new Vector3 (MaxSize, MaxSize), Time.deltaTime * Speed);
-		GetComponent<SpriteRenderer> ().color = Color.Lerp (GetComponent<SpriteRenderer> ().color, new Color (EndColor.r, EndColor.g, EndColor.b, 0f), Time.deltaTime * Speed);
+		transform.localScale = Vector3.Lerp (transform.localScale, new Vector3 (MaxSize, MaxSize), Time.unscaledDeltaTime * Speed);
+		GetComponent<SpriteRenderer> ().color = Color.Lerp (GetComponent<SpriteRenderer> ().color, new Color (EndColor.r, EndColor.g, EndColor.b, 0f), Time.unscaledDeltaTime * Speed);
 
 		//destroy at the end of life
 		if (transform.localScale.x >= MaxSize * 0.995f) {

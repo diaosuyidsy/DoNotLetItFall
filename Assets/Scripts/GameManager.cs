@@ -13,7 +13,10 @@ public class GameManager : MonoBehaviour
 	public GameObject SpinLinePrefab;
 	public float Tiime;
 	public int SquareNum;
-
+	public Sprite pauseImage;
+	public Sprite startImage;
+	public Button pauseButton;
+	public Button restartButton;
 
 	private float LineGenRate;
 	private float MovingRate;
@@ -23,6 +26,7 @@ public class GameManager : MonoBehaviour
 	private Text Score;
 	private int MaxSquareNum;
 	private int bestscore;
+	private bool paused = false;
 
 	void Awake ()
 	{
@@ -46,6 +50,21 @@ public class GameManager : MonoBehaviour
 		LineGenRate = 6f;
 		MovingRate = 2f;
 		Input.multiTouchEnabled = true;
+	}
+
+	public void PauseGame ()
+	{
+		if (!paused) {
+			pauseButton.image.sprite = startImage;
+			paused = true;
+			restartButton.gameObject.SetActive (true);
+			Time.timeScale = 0f;
+		} else {
+			pauseButton.image.sprite = pauseImage;
+			paused = false;
+			restartButton.gameObject.SetActive (false);
+			Time.timeScale = 1f;
+		}
 	}
 
 	public void StartGame ()
@@ -107,6 +126,7 @@ public class GameManager : MonoBehaviour
 
 	void restart ()
 	{
+		Time.timeScale = 1f;
 		SceneManager.LoadScene ("Main");
 	}
 
@@ -133,11 +153,7 @@ public class GameManager : MonoBehaviour
 	void Update ()
 	{
 		if (GameStart) {
-//			Tiime -= Time.deltaTime;
-//			Timer.text = Tiime.ToString ("F1");
-//			if (Tiime <= 0f) {
-//				GameOver ();
-//			}
+
 			foreach (Transform child in AllGameObjects.transform) {
 				child.Translate (Vector3.down * Time.deltaTime * MovingRate);
 			}
